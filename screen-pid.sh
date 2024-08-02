@@ -22,5 +22,5 @@ if [ -z "$pid" ]; then
     echo "No 'screen' process found with name $screen_name."
     exit 1
 else
-    echo "The PID of 'screen' with name $screen_name is: $pid"
+    echo $pid
 fi

@@ -9,8 +9,8 @@ source ~/.bashrc
 
 - Get child pid by parent pid and child comm:
 ```shell
-sudo curl -fsSL https://raw.githubusercontent.com/zovenor/bash-tools/main/get-child-pid.sh -o /usr/local/bin/get-child-pid
-sudo chmod +x /usr/local/bin/get-child-pid
+sudo curl -fsSL https://raw.githubusercontent.com/zovenor/bash-tools/main/child-pid.sh -o /usr/local/bin/child-pid
+sudo chmod +x /usr/local/bin/child-pid
 source ~/.bashrc
 ```
 
