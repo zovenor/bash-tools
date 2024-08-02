@@ -20,3 +20,10 @@ sudo curl -fsSL https://raw.githubusercontent.com/zovenor/bash-tools/main/screen
 sudo chmod +x /usr/local/bin/screen-pid
 source ~/.bashrc
 ```
+
+- Show processes tree:
+```shell
+sudo curl -fsSL https://raw.githubusercontent.com/zovenor/bash-tools/main/processes-tree.sh -o /usr/local/bin/processes-tree
+sudo chmod +x /usr/local/bin/processes-tree
+source ~/.bashrc
+```
