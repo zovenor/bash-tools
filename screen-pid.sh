@@ -13,7 +13,7 @@ else
 fi
 
 pid=$(eval "$screen_command" | awk -v name="$screen_name" '
-    /Detached/ {
+    /[0-9]+\.(Attached|Detached)/ {
         split($1, arr, ".")
         if (arr[2] == name) print arr[1]
     }')
