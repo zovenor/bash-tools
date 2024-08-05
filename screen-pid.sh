@@ -12,7 +12,13 @@ else
     screen_command="ssh $ssh_host 'screen -ls'"
 fi
 
-pid=$(eval "$screen_command" | awk -v name="$screen_name" '
+output=$(eval "$screen_command" 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "Error: failed to connect or execute screen command"
+    exit 1
+fi
+
+pid=$(echo "$output" | awk -v name="$screen_name" '
     /[0-9]+\.(Attached|Detached)/ {
         split($1, arr, ".")
         if (arr[2] == name) print arr[1]
