@@ -31,12 +31,14 @@ find_child_processes() {
 
     # Check if the eval command succeeded
     if [ $eval_exit_status -ne 0 ]; then
-        if [[ "$output" == *"ssh:"* ]]; then
+        case "$screen_output" in
+          *"ssh:"* | *"Connection closed by"* | *"kex_exchange_identification"*)
             echo "SSH connection to $ssh_host failed."
-        else
-            echo "An error occurred while executing the ps command: $output"
-        fi
+            exit 1
+            ;;
+        esac
         rm "$temp_file"
+        echo "SSH connection to $ssh_host failed."
         exit 1
     fi
 

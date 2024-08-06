@@ -15,11 +15,12 @@ fi
 screen_output=$(eval "$screen_command" 2>&1)
 
 
-# Check if the eval command succeeded
-if [[ "$screen_output" == *"ssh:"* ]]; then
-    echo "SSH connection to $ssh_host failed."
-    exit 1
-fi
+case "$screen_output" in
+    *"ssh:"* | *"Connection closed by"* | *"kex_exchange_identification"*)
+        echo "SSH connection to $ssh_host failed."
+        exit 1
+        ;;
+esac
 
 pid=$(echo "$screen_output" | awk -v name="$screen_name" '
     /Attached|Detached/ {
