@@ -12,7 +12,16 @@ else
     screen_command="ssh $ssh_host 'screen -ls'"
 fi
 
-pid=$(eval "$screen_command" | awk -v name="$screen_name" '
+screen_output=$(eval "$screen_command" 2>&1)
+
+
+# Check if the eval command succeeded
+if [[ "$screen_output" == *"ssh:"* ]]; then
+    echo "SSH connection to $ssh_host failed."
+    exit 1
+fi
+
+pid=$(echo "$screen_output" | awk -v name="$screen_name" '
     /Attached|Detached/ {
         split($1, arr, ".")
         if (arr[2] == name) print arr[1]
